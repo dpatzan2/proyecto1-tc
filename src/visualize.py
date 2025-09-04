@@ -11,6 +11,11 @@ def visualize_nfa(nfa, path='nfa'):
         print('graphviz no instalado: omitiendo renderizado de NFA (instala paquete graphviz)')
         return
     dot = Digraph()
+    dot.attr(rankdir='LR')  # Disposición horizontal (izquierda a derecha)
+    # Nodo de inicio (punto) con flecha al estado inicial
+    start_dummy = '__start__'
+    dot.node(start_dummy, label='', shape='point', width='0.1')
+    dot.edge(start_dummy, str(nfa.start))
     for s in sorted(nfa.states):
         shape = 'doublecircle' if s == nfa.accept else 'circle'
         dot.node(str(s), shape=shape)
@@ -26,6 +31,11 @@ def visualize_dfa(dfa, path='dfa'):
         print('graphviz no instalado: omitiendo renderizado de DFA (instala paquete graphviz)')
         return
     dot = Digraph()
+    dot.attr(rankdir='LR')  # Disposición horizontal (izquierda a derecha)
+    # Nodo de inicio (punto) con flecha al estado inicial
+    start_dummy = '__start__'
+    dot.node(start_dummy, label='', shape='point', width='0.1')
+    dot.edge(start_dummy, str(dfa.start))
     for s in sorted(dfa.states):
         shape = 'doublecircle' if s in dfa.accepts else 'circle'
         dot.node(str(s), shape=shape)
